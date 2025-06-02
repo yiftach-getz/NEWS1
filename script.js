@@ -113,10 +113,13 @@ function displayNews(container, newsItems, isFeed) {
         // Hebrew/Arabic toggle
         const hasHebrew = item.titleHe && item.descriptionHe;
         const langId = `lang-toggle-${isFeed ? 'feed' : 'hist'}-${idx}`;
+        // כפתור מחיקה
+        const deleteBtnId = `delete-btn-${isFeed ? 'feed' : 'hist'}-${idx}`;
         newsElement.innerHTML = `
             <h2 id="${langId}-title">${hasHebrew ? item.titleHe : item.title}</h2>
             <p id="${langId}-desc" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${hasHebrew ? item.descriptionHe : (item.description || '')}</p>
             <button class="lang-toggle-btn" onclick="toggleLang('${langId}', ${hasHebrew ? 'true' : 'false'}, '${escapeQuotes(item.titleHe || '')}', '${escapeQuotes(item.descriptionHe || '')}', '${escapeQuotes(item.title || '')}', '${escapeQuotes(item.description || '')}')">הצג ${hasHebrew ? 'ערבית' : 'עברית'}</button>
+            <button class="delete-btn" id="${deleteBtnId}" onclick="markAsRead(event, this)">מחק</button>
             ${tagsHtml}
             <div class="source">מקור: <a href="${item.link}" target="_blank">${item.source}</a></div>
             <div class="date">${item.date}</div>
@@ -209,4 +212,16 @@ function updateLastUpdateTime() {
 
 document.getElementById('refreshNews').addEventListener('click', fetchNews);
 fetchNews();
-setInterval(fetchNews, 5 * 60 * 1000); 
+setInterval(fetchNews, 5 * 60 * 1000);
+
+// הוסף פונקציה גלובלית למחיקת ידיעה
+window.markAsRead = function(event, btn) {
+    event.stopPropagation();
+    const newsItem = btn.closest('.news-item');
+    if (newsItem) {
+        newsItem.classList.add('read');
+        newsItem.style.textDecoration = 'line-through';
+        btn.disabled = true;
+        btn.textContent = 'נקרא';
+    }
+} 

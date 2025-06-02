@@ -103,13 +103,23 @@ module.exports = async (req, res) => {
             fetchIraqiNews(),
             fetchHashedArticles()
         ]);
+        console.log('iraqi:', iraqi.length, 'hashed:', hashed.length);
         let allNews = [...iraqi, ...hashed];
-
-        // Filter by Arabic keywords in title or description
-        allNews = allNews.filter(item => containsKeyword(item.title) || containsKeyword(item.description));
-
-        // Sort by date descending
+        // הדפס לפני סינון
+        console.log('allNews before filter:', allNews.length);
+        // ביטול סינון מילות מפתח:
+        // allNews = allNews.filter(item => containsKeyword(item.title) || containsKeyword(item.description));
+        // הדפס אחרי (לצורך בדיקה)
+        console.log('allNews after filter:', allNews.length);
+        // מיון לפי תאריך
         allNews.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+        // החזר חדשות מה-7 ימים האחרונים בלבד
+        const now = new Date();
+        const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+        allNews = allNews.filter(item => {
+            const d = new Date(item.date);
+            return d >= weekAgo;
+        });
         res.status(200).json(allNews);
     } catch (error) {
         console.error('Error fetching filtered news:', error);

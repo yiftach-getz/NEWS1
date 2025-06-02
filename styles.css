@@ -233,4 +233,9 @@ footer {
         width: 100px;
         height: 70px;
     }
+}
+
+.read {
+    text-decoration: line-through !important;
+    opacity: 0.5;
 } 
