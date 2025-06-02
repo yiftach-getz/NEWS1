@@ -39,7 +39,7 @@ async function fetchNews() {
     galleryContainer.innerHTML = '';
 
     try {
-        const response = await fetch('http://localhost:3000/api/news');
+        const response = await fetch('/api/news');
         const news = await response.json();
         if (news.error) throw new Error(news.error);
         allNewsData = news;
