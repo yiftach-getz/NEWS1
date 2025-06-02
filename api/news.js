@@ -113,12 +113,12 @@ module.exports = async (req, res) => {
         console.log('allNews after filter:', allNews.length);
         // מיון לפי תאריך
         allNews.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-        // החזר חדשות מה-7 ימים האחרונים בלבד
+        // החזר חדשות מה-30 ימים האחרונים בלבד
         const now = new Date();
-        const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+        const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
         allNews = allNews.filter(item => {
             const d = new Date(item.date);
-            return d >= weekAgo;
+            return d >= monthAgo;
         });
         res.status(200).json(allNews);
     } catch (error) {

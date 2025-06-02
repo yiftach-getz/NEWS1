@@ -212,7 +212,7 @@ function updateLastUpdateTime() {
 
 document.getElementById('refreshNews').addEventListener('click', fetchNews);
 fetchNews();
-setInterval(fetchNews, 5 * 60 * 1000);
+setInterval(fetchNews, 60 * 1000);
 
 // הוסף פונקציה גלובלית למחיקת ידיעה
 window.markAsRead = function(event, btn) {
