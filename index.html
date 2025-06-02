@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="he" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חדשות עיראק - Iraq News Feed</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>חדשות עיראק</h1>
+        <div class="refresh-button">
+            <button id="refreshNews">רענן חדשות</button>
+        </div>
+    </header>
+
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="חפש לפי מילות מפתח, מקור או תגית...">
+        <button id="searchBtn">חפש</button>
+    </div>
+
+    <div id="gallerySection">
+        <h2>גלריית תמונות מהחדשות</h2>
+        <div class="gallery" id="newsGallery"></div>
+    </div>
+
+    <main>
+        <section>
+            <h2>חדשות אחרונות</h2>
+            <div class="news-container" id="newsFeedContainer">
+                <!-- Live news feed will be added here -->
+            </div>
+        </section>
+        <section>
+            <h2>היסטוריית חדשות (2025 והלאה)</h2>
+            <div class="news-container" id="newsHistoryContainer">
+                <!-- Historical news will be added here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>עדכון אחרון: <span id="lastUpdate"></span></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
